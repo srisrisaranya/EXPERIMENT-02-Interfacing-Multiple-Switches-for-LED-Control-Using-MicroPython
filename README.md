@@ -1,12 +1,10 @@
 # EXPERIMENT-02-Interfacing-Multiple-Switches-for-LED-Control-Using-MicroPython
 
+## NAME: SARANYA S
 
- 
-## NAME:
+## DEPARTMENT: B.E CSE-IOT
 
-## DEPARTMENT:
-
-## ROLL NO:
+## ROLL NO: 212223110044
 
 ## DATE OF EXPERIMENT:
 
@@ -63,26 +61,74 @@ Connect LED 2 to GP17 via a 330Ω resistor.
 
 Connect the other terminals of the switches to GND.
 
-## PROGRAM (MicroPython)
-''''
+## PROGRAM (MicroPython):
+# Interfacing Multiple switches with LED:
+```
+from machine import Pin
+import time
+
+led = Pin(0, Pin.OUT)
+
+switch = Pin(1, Pin.IN, Pin.PULL_DOWN)
+
+while True:
+    if switch.value() == 1:   
+        led.value(1)
+        print("Switch ON → LED ON")
+    else:                    
+        led.value(0)
+        print("Switch OFF → LED OFF")
+    
+    time.sleep(0.1)
+```
+
+# OUTPUT:
+<img width="1919" height="916" alt="Screenshot 2025-09-07 215931" src="https://github.com/user-attachments/assets/6b41393b-b204-4f3d-b441-2bcb7a68d74d" />
+<img width="1919" height="983" alt="Screenshot 2025-09-07 215904" src="https://github.com/user-attachments/assets/4cb2053f-321b-466e-bbc6-ee1262eb36f1" />
 
 
 
- 
+# Interfacing Multiple switches with Multiple LED's:
+```
+from machine import Pin
+from time import sleep
+print("Welcome Pi Pico")
+switch1 = Pin(2, Pin.IN, Pin.PULL_UP)
+switch2 = Pin(3, Pin.IN, Pin.PULL_UP)
+led1 = Pin(15, Pin.OUT)
+led2 = Pin(16, Pin.OUT)
 
-## OUTPUT
+while True:
+    sw1_state = switch1.value()  
+    sw2_state = switch2.value()
+    
+    print("Switch 1 state:", sw1_state)
+    print("Switch 2 state:", sw2_state)
+    
+    
+    led1.value(0)
+    led2.value(0)
+    
+    if sw1_state == 1 and sw2_state == 1:
+        led1.value(0)
+        led2.value(0)
+    elif sw1_state == 1:
+        led1.value(0)
+        sleep(0.5)
+        led1.value(1)
+    elif sw2_state == 1:
+        led2.value(0)
+        sleep(0.5)
+        led2.value(1)
+    
+    sleep(0.1)
+```
 
-
-
-FIGURE-02: CIRCUIT CONNECTION
-
-FIGURE-03: CODE EXECUTION OUTPUT
-
-FIGURE-04: LED STATUS BASED ON SWITCH INPUTS
-## TIMING DIGAGRAM 
-
-
-UPLOAD YOUR TIMING DIGARAM HERE 
+## OUTPUT:
+<img width="1919" height="920" alt="Screenshot 2025-09-07 221520" src="https://github.com/user-attachments/assets/eec1603e-cf3e-4d6c-b1c9-b4d9514d34dd" />
+<img width="1919" height="895" alt="Screenshot 2025-09-07 221452" src="https://github.com/user-attachments/assets/68d59077-7be0-45ab-83fa-d1f1b5604707" />
+<img width="1919" height="896" alt="Screenshot 2025-09-07 221402" src="https://github.com/user-attachments/assets/3ca80adf-b7e3-4413-a804-b62a4fa97bff" />
+<img width="1919" height="897" alt="Screenshot 2025-09-07 221330" src="https://github.com/user-attachments/assets/1e104974-13d3-4eb3-9e36-fcc6c3215481" />
 
 
 
